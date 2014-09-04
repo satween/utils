@@ -1,11 +1,11 @@
 utils
 =====
 
-This library was written for simplifying often routing tasks in Android development
+This library was written for simplifying often routine tasks in Android development
 
 ####Installing
 
-1. In Android Studio Click File->Import Module and select directory with sources
+1. In Android Studio Click _File->Import Module_ and select directory with sources
 2. In build.gradle dependecies section add:
 
 ```groovy
