@@ -6,9 +6,6 @@ This library was written for simplifying often routing tasks in Android developm
 There is some examles of usage:
 ====
 
-* sdsd
-
-
 Installing
 ===
 
@@ -17,7 +14,8 @@ Installing
 
 ```groovy
 
-Linguist::FileBlob.new("lib/linguist.rb").language.name #=> "Ruby"
-
-Linguist::FileBlob.new("bin/linguist").language.name #=> "Ruby"
+dependencies {
+    //...
+    compile project(':hideninstaller')
+}
 ```
