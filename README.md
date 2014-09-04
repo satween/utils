@@ -3,9 +3,6 @@ utils
 
 This library was written for simplifying often routing tasks in Android development
 
-There is some examles of usage:
-====
-
 Installing
 ===
 
@@ -19,5 +16,7 @@ dependencies {
     compile project(':utils')
 }
 ```
-
+Dependecies
+===
+This library depends on Google's Guava library. For more info [look here](https://code.google.com/p/guava-libraries/).
 
