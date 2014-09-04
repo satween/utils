@@ -12,10 +12,12 @@ Installing
 1. In Android Studio Click File->Import Module and select directory with sources
 2. In build.gradle dependecies section add:
 
-```groovy
+```gradle
 
 dependencies {
     //...
-    compile project(':hideninstaller')
+    compile project(':utils')
 }
 ```
+
+
