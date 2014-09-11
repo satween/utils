@@ -62,7 +62,7 @@ public class UtilsFactory {
      * @return new {@link com.satween.utils.SimpleUI} object
      */
     public SimpleUI createSimpleUI() {
-        return new SimpleUI();
+        return new SimpleUI(context);
     }
 
     /**
