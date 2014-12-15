@@ -1,6 +1,7 @@
 package com.satween.utils;
 
 import com.google.common.base.Charsets;
+import com.google.common.io.CharStreams;
 import com.google.common.io.Files;
 
 import java.io.ByteArrayInputStream;
@@ -9,6 +10,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.List;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -126,6 +128,34 @@ public class IOUtil {
     public String readToString(File file) throws IOException {
         checkFileExist(file);
         return Files.toString(file, Charsets.UTF_8);
+    }
+
+
+    public String readToString(InputStream inputStream) {
+        checkNotNull(inputStream);
+        String content = null;
+        InputStreamReader inputStreamReader = null;
+
+        try {
+            inputStreamReader = new InputStreamReader(inputStream);
+            content = CharStreams.toString(inputStreamReader);
+        } catch (IOException ignored) {
+
+        } finally {
+            closeStream(inputStreamReader);
+        }
+
+        return content;
+    }
+
+    private void closeStream(InputStreamReader inputStreamReader) {
+        if (inputStreamReader != null) {
+            try {
+                inputStreamReader.close();
+            } catch (IOException ignored) {
+
+            }
+        }
     }
 
     public String getFileExtension(String path) throws FileNotFoundException {
@@ -270,11 +300,16 @@ public class IOUtil {
      * @param path
      * @return
      */
-    public boolean createFullPath(String path) {
+    public boolean createFullPathOfFile(String path) {
         checkNotNull(path);
-        path = clearPath(path);
 
         return new File(getBaseDir(clearPath(path))).mkdirs();
+    }
+
+    public boolean createFullPathOfDir(String path) {
+        checkNotNull(path);
+
+        return new File(clearPath(path)).mkdirs();
     }
 
 }

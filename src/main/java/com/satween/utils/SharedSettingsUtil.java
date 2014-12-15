@@ -23,12 +23,17 @@ public class SharedSettingsUtil {
         this.context = context;
     }
 
+
     public String getString(String key, String defaultValue) {
         return getSharedPreferences(context).getString(key, defaultValue);
     }
 
     public boolean getBoolean(String key, boolean defaultValue) {
         return getSharedPreferences(context).getBoolean(key, defaultValue);
+    }
+
+    public int getInt(String key, int defaultValue) {
+        return getSharedPreferences(context).getInt(key, defaultValue);
     }
 
     public void putString(String key, String value) {
@@ -40,6 +45,12 @@ public class SharedSettingsUtil {
     public void putBoolean(String key, boolean value) {
         SharedPreferences.Editor e = getSharedPreferences(context).edit();
         e.putBoolean(key, value);
+        e.commit();
+    }
+
+    public void putInt(String key, int value) {
+        SharedPreferences.Editor e = getSharedPreferences(context).edit();
+        e.putInt(key, value);
         e.commit();
     }
 

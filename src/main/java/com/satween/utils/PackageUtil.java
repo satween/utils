@@ -1,5 +1,6 @@
 package com.satween.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -19,13 +20,12 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public class PackageUtil {
 
+    public static final String ARCHIVE = "application/vnd.android.package-archive";
     private static final int NO_FLAGS = 0;
     private static final String PACKAGE_SCHEME = "package";
-    public static final String ARCHIVE = "application/vnd.android.package-archive";
-
     private Context context;
     private PackageManager packageManager;
-    private LogUtil logger = new LogUtil();
+    private LogUtil logger = LogUtil.get(this);
 
     public PackageUtil(Context context, PackageManager packageManager) {
         this.context = context;
@@ -49,9 +49,9 @@ public class PackageUtil {
             isSuccess = true;
 
         } catch (PackageManager.NameNotFoundException e) {
-            logger.logError(this, e);
+            logger.logError(e);
         } catch (NullPointerException e) {
-            logger.logError(this, e);
+            logger.logError(e);
         }
         return isSuccess;
     }
@@ -104,6 +104,10 @@ public class PackageUtil {
                 return app.sourceDir;
         }
         return defaultFilePath;
+    }
+
+    public String getMyPackageName(Activity activity) {
+        return activity.getApplication().getApplicationContext().getPackageName();
     }
 
     public PackageManager getPackageManager() {

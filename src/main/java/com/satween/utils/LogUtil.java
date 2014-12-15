@@ -1,8 +1,8 @@
 package com.satween.utils;
 
 import android.util.Log;
-
 import com.google.common.base.Joiner;
+import com.google.common.base.Optional;
 
 /**
  * Little log helper
@@ -11,39 +11,64 @@ import com.google.common.base.Joiner;
  */
 
 public class LogUtil {
+    public static String TAG = "UTILS";
+    String defaultClassName;
 
-    public static LogUtil get() {
-        return new LogUtil();
+    private LogUtil(Object o) {
+        this.defaultClassName = o.getClass().getName();
     }
 
-    public static String TAG = "UTILS_LIB";
 
-    public void logError(Object o, String message) {
-        Log.e(TAG, format(o, message));
+    private LogUtil(Class clazz) {
+        this.defaultClassName = clazz.getName();
     }
 
-    public void logInfo(Object o, String message) {
-        Log.i(TAG, format(o, message));
+    public static LogUtil get(Object o) {
+        return new LogUtil(o);
     }
 
-    public void logError(Object o, Exception e) {
-        Log.e(TAG, format(o, e.getMessage()));
+    public static LogUtil get(Class clazz) {
+        return new LogUtil(clazz);
     }
 
-    public void logError(Class clazz, String message) {
-        Log.e(TAG, format(clazz.getName(), message));
+    public void logError(String message) {
+        logError(defaultClassName, message);
     }
 
-    public void logInfo(Class clazz, String message) {
-        Log.i(TAG, format(clazz.getName(), message));
+    public void logError(String className, String message) {
+        Log.e(TAG, format(className, message));
     }
 
-    private String format(Object o, String message) {
-        return format(o.getClass().getName(), message);
+    public void logError(Exception e) {
+        logError(defaultClassName, e);
+    }
+
+    public void logError(String className, Exception e) {
+        Log.e(TAG, format(className, e.getMessage()));
+        e.printStackTrace();
+    }
+
+    public void logInfo(String message) {
+        logInfo(defaultClassName, message);
+    }
+
+    public void logInfo(String className, String message) {
+        Log.i(TAG, format(className, message));
+    }
+
+    public void logDebug(String message) {
+        logDebug(defaultClassName, message);
+    }
+
+    public void logDebug(String className, String message) {
+        Log.d(TAG, format(className, message));
     }
 
     private String format(String className, String message) {
-        return Joiner.on(" ").join(message, "[", "at", className, "]");
+        return Joiner.on(" ").join("[", "at", className, "]", "\n", Optional.fromNullable(message).or(" unknown "));
     }
 
+    public String getDefaultClassName() {
+        return defaultClassName;
+    }
 }

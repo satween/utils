@@ -15,8 +15,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public class DateUtil {
     public static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd";
     public static final int DAY_IN_MILLISECONDS = 1000 * 60 * 60 * 24;
-    private String dateFormat;
     SimpleDateFormat formatter;
+    private String dateFormat;
 
 
     /**

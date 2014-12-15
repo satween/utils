@@ -148,7 +148,7 @@ public class IOUtilTest extends InstrumentationTestCase {
     public void testPathCreation() {
         String dirs = Environment.getExternalStorageDirectory() + "/1/2/3/4/";
         IOUtil ioUtil = new IOUtil();
-        ioUtil.createFullPath(dirs);
+        ioUtil.createFullPathOfFile(dirs);
 
         assertTrue(new File(Environment.getExternalStorageDirectory() + "/1").exists());
         assertTrue(new File(Environment.getExternalStorageDirectory() + "/1/2").exists());
@@ -166,7 +166,7 @@ public class IOUtilTest extends InstrumentationTestCase {
     public void testPathCreationWhenPathContainDoubleSlashes() {
         String dirs = Environment.getExternalStorageDirectory() + "/1///2/////////3////4/";
         IOUtil ioUtil = new IOUtil();
-        ioUtil.createFullPath(dirs);
+        ioUtil.createFullPathOfFile(dirs);
 
         assertTrue(new File(Environment.getExternalStorageDirectory() + "/1").exists());
         assertTrue(new File(Environment.getExternalStorageDirectory() + "/1/2").exists());
